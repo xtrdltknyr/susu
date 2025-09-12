@@ -209,8 +209,11 @@ namespace Feladatsor
             double r = DoubleBeker("Add meg a sugarat: ");
             double a = DoubleBeker("Add meg a szöget: ");
 
-            //Console.WriteLine($"A körív területe"
+            double i = ((2*r * Math.PI) / 360) * a;
+
+            Console.WriteLine($"A körcikk területe {(r * i) / 2:F2}, ív hossza {i:F2}");
         }
+
 
         static int Beker(string text)
         {
@@ -264,7 +267,7 @@ namespace Feladatsor
         }
         static void Main(string[] args)
         {
-            Feladat13();
+            Feladat14();
         }
     }
 }
