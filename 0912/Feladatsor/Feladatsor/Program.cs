@@ -1,5 +1,4 @@
-﻿using System.Collections.Concurrent;
-using System.ComponentModel.Design;
+﻿using System;
 
 namespace Feladatsor
 {
@@ -228,7 +227,7 @@ namespace Feladatsor
 
             Console.WriteLine($"A körcikk területe {(r * i) / 2:F2}, ív hossza {i:F2}");
         }
-        static void F15() 
+        static void F15()
         {
             int input;
             do
@@ -240,8 +239,255 @@ namespace Feladatsor
                 }
             }
             while (input <= 0);
-        } 
+        }
+        static void F16()
+        {
+            int input;
+            do
+            {
+                input = AskForInt("Kérlek, adj meg egy pozitív egész számot: ");
+                for (global::System.Int32 i = 0; i < input; i++)
+                {
+                    Console.WriteLine($"{i} ");
+                }
+            }
+            while (input <= 0);
+        }
+        static void F17()
+        {
+            int input = AskForInt("Add meg a számot, aminek az osztóját akarod tudni! ");
 
+            for (int i = 1; i <= input; i++)
+            {
+                if (input % i == 0)
+                {
+                    Console.Write($"{i} ");
+                }
+            }
+        }
+        static void F18()
+        {
+            int input = AskForInt("Add meg a számot, aminek az osztóját akarod tudni! ");
+            int n = 0;
+            for (int i = 1; i <= input; i++)
+            {
+                if (input % i == 0)
+                {
+                    n += i;
+                }
+            }
+            Console.WriteLine(n);
+        }
+        static void F19()
+        {
+            int input = AskForInt("Add meg a számot, amit ellenőrizzek: ");
+            int n = 0;
+            for (int i = 1; i <= input; i++)
+            {
+                if (input % i == 0)
+                {
+                    n += i;
+                }
+            }
+            if (n == input * 2)
+            {
+                System.Console.WriteLine("Ez egy tökéletes szám.");
+            }
+            else
+            {
+                System.Console.WriteLine("Ez egy szar szám.");
+            }
+        }
+        static void F20()
+        {
+            int input1 = AskForInt("Add meg a hatványalapot: ");
+            int input2 = AskForInt("Add meg a hatványkitevőt: ");
+
+            System.Console.WriteLine($"A {Math.Pow(input1, input2)}");
+        }
+        static void F21()
+        {
+            double input = AskForDouble("Adj meg egy számot, ami pozitív: ");
+            if (input > 0)
+            {
+                System.Console.WriteLine(":)");
+            }
+            else
+            {
+                System.Console.WriteLine("Ez csúnya volt tőled.");
+            }
+        }
+        static void F22()
+        {
+            int input = AskForInt("Éhes vagyok, etess számokkal! ");
+            int n = 0;
+            while (input < 10)
+            {
+                n += input;
+                input = AskForInt("Adj még! ");
+            }
+            if (n == 0)
+            {
+                System.Console.WriteLine("Túl erős kezdés.");
+            }
+            else
+            {
+                System.Console.WriteLine($"A 10-nél nagyobb számod nélkül az eredmény: {n}.");
+            }
+        }
+        static void F23()
+        {
+            int input = AskForInt("Kérek egy egész számot: ");
+            int n = 0;
+            int num = 0;
+            n = input % 2;
+            num = input / 2;
+            int prevNum = 0;
+            if (input % 2 == 0)
+            {
+                while (n == 0)
+                {
+                    Console.Write("2*");
+                    n = num % 2;
+                    prevNum = num;
+                    num = num / 2;
+                }
+                System.Console.Write(prevNum);
+            }
+            else
+            {
+                System.Console.WriteLine($"{input} = {input}");
+            }
+
+        }
+        static void F24()
+        {
+            System.Console.Write("Adj meg egy szót: ");
+            string input = Console.ReadLine()!;
+
+            if (input == "alma")
+            {
+                System.Console.WriteLine("Az alma egy gyümölcs!");
+            }
+        }
+        static void F25()
+        {
+            int input = AskForInt("Kérek egy egész számot! ");
+            int n = 0;
+            int num = input;
+
+            while (num >= 3)
+            {
+                num = num -= 3;
+                n++;
+            }
+            System.Console.WriteLine($"{input} = {n}*3+{num % 3}");
+        }
+        static void F26()
+        {
+            int input = AskForInt("Adj meg egy egész számot: ");
+            int n = 0;
+            for (int i = 2; i < Math.Sqrt(input); i++)
+            {
+                if (input % i == 0)
+                {
+                    n++;
+                }
+            }
+            if (n == 0)
+            {
+                System.Console.WriteLine("A szám prímszám!");
+            }
+            else
+            {
+                System.Console.WriteLine("A szám nem prím!");
+            }
+        }
+        static void F27()
+        {
+            int input = AskForInt("Adj meg egy egész számot: ");
+            for (int i = 0; i < input; i++)
+            {
+                int n = 0;
+                for (int j = 2; j < i; j++)
+                {
+                    if (i % j == 0)
+                    {
+                        n++;
+                    }
+                }
+                if (n == 0 && i > 2)
+                {
+                    System.Console.Write($"{i} ");
+                }
+            }
+        }
+        static void F28()
+        {
+            int input = AskForInt("Adj meg egy egész számot: ");
+            for (int i = 1; i < input; i++)
+            {
+                int n = 0;
+                if (input % i == 0)
+                {
+                    for (int j = 2; j < i; j++)
+                    {
+                        if (i % j == 0)
+                        {
+                            n++;
+                        }
+                    }
+                    if (n == 0 && i > 2)
+                    {
+                        System.Console.Write($"{i} ");
+                    }
+                }
+            }
+        }
+        static void F29()
+        {
+            //Át kell nézni!!!!!!!
+            int input = AskForInt("Adj meg egy egész számot: ");
+            int n;
+            if (input % 2 == 0)
+            {   
+                System.Console.WriteLine($"{input} | 2");
+                n = input / 2;
+                while (n != 1)
+                {
+                    for (int i = 1; i < n; i++)
+                    {
+                        int m = 0;
+                        if (input % i == 0)
+                        {
+                            for (int j = 2; j < i; j++)
+                            {
+                                if (i % j == 0)
+                                {
+                                    m++;
+                                }
+                            }
+                            if (m == 0 && i > 2)
+                            {
+                                System.Console.WriteLine($"{n} | {i}");
+                                n = n / i;
+                            }
+                        }
+                    }
+                }   
+            }
+        }
+        static void F30()
+        {
+            int input1 = AskForInt("Add meg az egyik számot: ");
+            int input2 = AskForInt("Add meg a másik számot: ");
+
+            if (input1 >= input2)
+            {
+                
+            }
+        }
+        //---------------------------------------------------------------------------------------------------------------------------------------
         static int AskForInt(string text)
         {
             int? num = null;
@@ -257,18 +503,20 @@ namespace Feladatsor
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Nagy szám ez, nem tudok vele mit kezdeni...");
+                    Console.ResetColor();
                 }
                 catch (FormatException)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Szerintem ez nem egy szám.");
+                    Console.ResetColor();
                 }
             }
             while (num is null);
             Console.ResetColor();
             return num.Value;
         }
- 
+
         static double AskForDouble(string text)
         {
 
@@ -276,7 +524,7 @@ namespace Feladatsor
             do
             {
                 Console.Write(text);
-                string inp = Console.ReadLine()!;
+                string inp = Console.ReadLine()!.Replace('.', ',');
                 try
                 {
                     num = double.Parse(inp);
@@ -285,14 +533,14 @@ namespace Feladatsor
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Nagy szám ez, nem tudok vele mit kezdeni...");
+                    Console.ResetColor();
                 }
                 catch (FormatException)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Szerintem ez nem egy szám.");
+                    Console.ResetColor();
                 }
-                Console.Write(text);
-                inp = Console.ReadLine()!;
             }
             while (num is null);
             Console.ResetColor();
@@ -301,7 +549,7 @@ namespace Feladatsor
         }
         static void Main(string[] args)
         {
-            F15();
+            F29();
         }
     }
 }
