@@ -454,7 +454,7 @@ namespace Feladatsor
             {
                 for (int i = 1; i <= n; i++)
                 {
-                    if (n % i == 0 && isPrime(i))
+                    if (n % i == 0 && IsPrime(i))
                     {
                         divider = i;
                         Console.WriteLine($"\t{n}\t| {divider}");
@@ -492,9 +492,47 @@ namespace Feladatsor
             Console.WriteLine($"A legkisebb közös többszörös: {Math.Abs(input1*input2)/lnko}");
             
         }
+        static void F32()
+        {
+            int input = AskForInt("Add meg a számot: ");
+            
+            for (int i = 1; i < 10; i++)
+            {
+                for (int j = 1; j < 10; j++)
+                {
+                    Console.Write($"{i * j * input}\t ");
+                }
+            }
+        }
+        static void F33()
+        {
+            int input = AskForInt("Add meg a számot: ");
+
+            for (int i = 1; i < 10; i++)
+            {
+                for (int j = 1; j < 10; j++)
+                {
+                    Console.Write($"{i + j + input}\t ");
+                }
+            }
+        }
+        static void F34()
+        {
+
+        }
+        static void F35()
+        {
+            for(byte i = 0;i < 255; i++)
+            {   
+                if (char.IsAsciiLetterLower((char)i))
+                {
+                    Console.Write($"{i}\t{(char)i}\t\t");
+                }    
+            }
+        }
         //---------------------------------------------------------------------------------------------------------------------------------------
 
-        static bool isPrime(int input)
+        static bool IsPrime(int input)
         {
             int n = 0;
             bool prime = false;
@@ -574,7 +612,7 @@ namespace Feladatsor
         }
         static void Main(string[] args)
         {
-            F29();
+            F35();
         }
     }
 }
