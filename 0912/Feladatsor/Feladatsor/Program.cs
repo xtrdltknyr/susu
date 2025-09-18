@@ -406,6 +406,7 @@ namespace Feladatsor
         static void F27()
         {
             int input = AskForInt("Adj meg egy egész számot: ");
+            Console.Write("A ");
             for (int i = 0; i < input; i++)
             {
                 int n = 0;
@@ -446,48 +447,72 @@ namespace Feladatsor
         }
         static void F29()
         {
-            //Át kell nézni!!!!!!!
             int input = AskForInt("Adj meg egy egész számot: ");
-            int n;
-            if (input % 2 == 0)
-            {   
-                System.Console.WriteLine($"{input} | 2");
-                n = input / 2;
-                while (n != 1)
+            int n = input;
+            int divider;
+            while (n > 1)
+            {
+                for (int i = 1; i <= n; i++)
                 {
-                    for (int i = 1; i < n; i++)
+                    if (n % i == 0 && isPrime(i))
                     {
-                        int m = 0;
-                        if (input % i == 0)
-                        {
-                            for (int j = 2; j < i; j++)
-                            {
-                                if (i % j == 0)
-                                {
-                                    m++;
-                                }
-                            }
-                            if (m == 0 && i > 2)
-                            {
-                                System.Console.WriteLine($"{n} | {i}");
-                                n = n / i;
-                            }
-                        }
+                        divider = i;
+                        Console.WriteLine($"\t{n}\t| {divider}");
+                        n = n / i;
                     }
-                }   
+                }
             }
         }
-        static void F30()
+        //F30
+        static int LNKO(int input1, int input2)
+        {
+            //int input1 = AskForInt("Add meg az egyik számot: ");
+            //int input2 = AskForInt("Add meg a másik számot: ");
+            int a = input1 < input2 ? input1 : input2;
+            int b = input1 > input2 ? input1 : input2;
+            int result = 1;
+
+            for (int i = a; i > 0; i--)
+            {
+                if (a % i == 0 && b % i == 0)
+                {
+                    result = i;
+                    break;
+                }
+            }
+            return result;
+            //Console.WriteLine($"A legnagyobb közös osztó: {result}");
+        }
+        static void F31()
         {
             int input1 = AskForInt("Add meg az egyik számot: ");
             int input2 = AskForInt("Add meg a másik számot: ");
+            int lnko = LNKO(input1, input2);
 
-            if (input1 >= input2)
-            {
-                
-            }
+            Console.WriteLine($"A legkisebb közös többszörös: {Math.Abs(input1*input2)/lnko}");
+            
         }
         //---------------------------------------------------------------------------------------------------------------------------------------
+
+        static bool isPrime(int input)
+        {
+            int n = 0;
+            bool prime = false;
+            for (int i = 1; i < input; i++)
+            {
+                if (input % i == 0)
+                {
+                    n++;
+                }
+            }
+            if (n == 1)
+            {
+                prime = true;
+            }
+
+
+            return prime;
+        }
         static int AskForInt(string text)
         {
             int? num = null;
