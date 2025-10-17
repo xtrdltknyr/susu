@@ -21,13 +21,13 @@ namespace consolePainter
         {
             Console.SetWindowSize(120, 51);
             Console.SetBufferSize(120, 51);
-            Console.SetCursorPosition(2, 2);
             Console.Title = "ConsolePainter PreBeta 1";
-            Console.WriteLine("Poo Drawing Program @ anyád 2025 - All Rights Reserved");
+            //Console.WriteLine("ConsolePainter @ extrudált kenyér 2025 - All Rights Reserved\n\n");
+            Console.WriteLine("\t   ______                       __     ____        _       __           \r\n\t  / ____/___  ____  _________  / /__  / __ \\____ _(_)___  / /____  _____\r\n\t / /   / __ \\/ __ \\/ ___/ __ \\/ / _ \\/ /_/ / __ `/ / __ \\/ __/ _ \\/ ___/\r\n\t/ /___/ /_/ / / / (__  ) /_/ / /  __/ ____/ /_/ / / / / / /_/  __/ /    \r\n\t\\____/\\____/_/ /_/____/\\____/_/\\___/_/    \\__,_/_/_/ /_/\\__/\\___/_/     \r\n                                        \\| An extrudált kenyér product. |/ \n");
             Thread.Sleep(500);
-            Console.WriteLine($" -- Canvas Creation ! -- \n     ? Strike <ESC> to quit.");
-            Console.WriteLine($"Background Color:\n - 0 = Black\n - 1 = Dark Blue\n - 2 = Dark Green\n - 3 = Dark Cyan\n - 4 = Dark Red\n - 5 = Dark Magenta\n - 6 = Dark Yellow\n - 7 = Gray\n - 8 = Dark Gray\n - 9 = Blue\n - 10 = Green\n - 11 = Cyan\n - 12 = Red\n - 13 = Magenta\n - 14 = Yellow\n - 15 = White");
-            Console.Write(" ~ ");
+            Console.WriteLine($"\n -- Canvas Creation ! -- \n ? Strike <ESC> to quit.\n");
+            Console.WriteLine($" - Please choose a Background Color:\n - 0 = Black\n - 1 = Dark Blue\n - 2 = Dark Green\n - 3 = Dark Cyan\n - 4 = Dark Red\n - 5 = Dark Magenta\n - 6 = Dark Yellow\n - 7 = Gray\n - 8 = Dark Gray\n - 9 = Blue\n - 10 = Green\n - 11 = Cyan\n - 12 = Red\n - 13 = Magenta\n - 14 = Yellow\n - 15 = White");
+            Console.Write("\n ~ ");
             bgColor = int.Parse(Console.ReadLine());
             Console.Clear();
             Console.BackgroundColor = (ConsoleColor)bgColor;
@@ -105,7 +105,7 @@ namespace consolePainter
                         Environment.Exit(0);
                         break;
                     case ConsoleKey.Tab:
-                        if(color < 14)
+                        if(color < 15)
                         {
                             color++;
                         }
@@ -115,7 +115,17 @@ namespace consolePainter
                         }
                         break;
                     case ConsoleKey.Q:
-                        if(opacity < 3)
+                        if(color > 1)
+                        {
+                            color--;
+                        }
+                        else
+                        {
+                            color = 15;
+                        }
+                        break;
+                    case ConsoleKey.W:
+                        if (opacity < 3)
                         {
                             opacity++;
                         }
@@ -124,7 +134,7 @@ namespace consolePainter
                             opacity = 0;
                         }
                         break;
-                }
+                     }
                 if (Console.CapsLock)
                 {
                     Draw();
@@ -136,16 +146,28 @@ namespace consolePainter
 
         static void CreateUI()
         {
+            string[] op = ["100%", "75%", "50%", "25%"];
+
             // Border
+            for (int i = 0; i < 51; i++)
+            {
+                for (int j = 101; j < 120; j++)
+                {
+                    Console.SetCursorPosition(j, i);
+                    Console.Write(' ');
+                    Console.BackgroundColor = ConsoleColor.Black;
+                }
+            }
             for (int i = 0; i < 51; i++)
             {
                 Console.SetCursorPosition(101, i);
                 Console.Write('!');
             }
+
             // Tool display
             Console.SetCursorPosition(103, 1);
             Console.Write("Yo tool: ");
-            Console.SetCursorPosition(103, 2);
+            Console.SetCursorPosition(105, 2);
             Console.Write(tool);
             // Color Display
             Console.SetCursorPosition(103, 4);
@@ -160,16 +182,28 @@ namespace consolePainter
             Console.Write('█');
             Console.SetCursorPosition(108, 6);
             Console.Write((ConsoleColor)color);
-            Console.SetCursorPosition(110, 6);
-            Console.Write("Yo opacity:");
-            Console.SetCursorPosition(111, 6);
+            Console.SetCursorPosition(110, 7);
+            Console.Write(op[opacity]);
+            // hints
+            Console.SetCursorPosition(103, 40);
+            Console.WriteLine("Tab - Cycle color");
+            Console.SetCursorPosition(103, 41);
+            Console.WriteLine("Q - same thing");
+            Console.SetCursorPosition(103, 42);
+            Console.WriteLine("W - Opacity");
+            Console.SetCursorPosition(103, 43);
+            Console.WriteLine("E - Switch tool");
+            Console.SetCursorPosition(103, 44);
+            Console.WriteLine("CapsLk - Thing");
             
 
         }
         static void UpdateUI()
         {
+            string[] op = ["100%", "75%", "50%", "25%"];
+
             // tool
-            Console.SetCursorPosition(103, 2);
+            Console.SetCursorPosition(105, 2);
             Console.ForegroundColor = ConsoleColor.White;
             Console.Write(tool);
             Console.ForegroundColor = (ConsoleColor)color;
@@ -187,9 +221,13 @@ namespace consolePainter
             Console.ForegroundColor = (ConsoleColor)color;
             Console.Write('█');
             Console.SetCursorPosition(108, 6);
-            Console.Write("              ");
+            Console.Write("           ");
             Console.SetCursorPosition(108, 6);
             Console.Write((ConsoleColor)color);
+            Console.SetCursorPosition(110, 7);
+            Console.Write("    ");
+            Console.SetCursorPosition(110, 7);
+            Console.Write(op[opacity]);
         }
         static void Draw()
         {
