@@ -1,46 +1,56 @@
-﻿using System.Security.Principal;
+﻿using System.Drawing;
+using System.Security.Principal;
 
 namespace consolePainter
 {
     internal class Program
     {
+        public static bool eraser = false;
+        public static bool drawToggle = false;
+        public static int bgColor = 0;
+        public static int x = 0;
+        public static int y = 0;
+        public static int opacity = 0;
+        public static string tool = "none";
+        public static int color = 1;
+        public static char[] shade = ['█', '▓', '▒', '░'];
+
+
+
         static void Main(string[] args)
         {
             Console.SetWindowSize(120, 51);
+            Console.SetBufferSize(120, 51);
             Console.SetCursorPosition(2, 2);
+            Console.Title = "ConsolePainter PreBeta 1";
             Console.WriteLine("Poo Drawing Program @ anyád 2025 - All Rights Reserved");
             Thread.Sleep(500);
-            Console.WriteLine(/*$" -- Canvas Creation ! -- \n*/ "    ? Strike <ESC> to quit.");
-            Thread.Sleep(500);
+            Console.WriteLine($" -- Canvas Creation ! -- \n     ? Strike <ESC> to quit.");
+            Console.WriteLine($"Background Color:\n - 0 = Black\n - 1 = Dark Blue\n - 2 = Dark Green\n - 3 = Dark Cyan\n - 4 = Dark Red\n - 5 = Dark Magenta\n - 6 = Dark Yellow\n - 7 = Gray\n - 8 = Dark Gray\n - 9 = Blue\n - 10 = Green\n - 11 = Cyan\n - 12 = Red\n - 13 = Magenta\n - 14 = Yellow\n - 15 = White");
+            Console.Write(" ~ ");
+            bgColor = int.Parse(Console.ReadLine());
             Console.Clear();
+            Console.BackgroundColor = (ConsoleColor)bgColor;
+            Console.Clear();
+            
+            CreateUI();
 
-            for (int i = 0; i < 50; i++)
-            {
-                Console.SetCursorPosition(101, i);
-                Console.Write('#');
-            }
 
-            /*
-            Console.WriteLine(" - Recommended: anyád | Maximum: 50x50");
-            int inWidth = AskForInt(" ~ Width: ");
-            int inHeight = AskForInt(" ~ Height: ");
-            Console.WriteLine();
-            Console.SetCursorPosition(4, 8);
-
-            CreateCanvas(inWidth, inHeight);
-            */
-
-            int x = 0;
-            int y = 0;
-
-            Console.CursorVisible = false;
             while (true)
             {
-                var key = Console.ReadKey(true).Key;
-                Console.SetCursorPosition(x, y);
-                Console.Write(' ');
+                if (!eraser)
+                {
+                    tool = "PENCIL";
+                }
+                else
+                {
+                    tool = "ERASER";
+                }
 
-                bool color = false;
+                UpdateUI();
+                Console.SetCursorPosition(x, y);
+    
+                var key = Console.ReadKey(true).Key;
 
                 switch (key)
                 {
@@ -84,28 +94,117 @@ namespace consolePainter
                         {
                             break;
                         }
+                    case ConsoleKey.E:
+                        eraser = !eraser;
+                        Console.SetCursorPosition(x, y);
+                        break;
                     case ConsoleKey.Spacebar:
-                        color ^= true;
+                        Draw();
                         break;
                     case ConsoleKey.Escape:
                         Environment.Exit(0);
                         break;
+                    case ConsoleKey.Tab:
+                        if(color < 14)
+                        {
+                            color++;
+                        }
+                        else
+                        {
+                            color = 1;
+                        }
+                        break;
+                    case ConsoleKey.Q:
+                        if(opacity < 3)
+                        {
+                            opacity++;
+                        }
+                        else
+                        {
+                            opacity = 0;
+                        }
+                        break;
+                }
+                if (Console.CapsLock)
+                {
+                    Draw();
                 }
                 Console.SetCursorPosition(x, y);
-                Console.Write('¤');
-                if (color)
-                {
-                    Console.BackgroundColor = ConsoleColor.Green;
-                }
-                else
-                {
-                    Console.BackgroundColor = ConsoleColor.Red;
-                }
-
             }
+
+        }
+
+        static void CreateUI()
+        {
+            // Border
+            for (int i = 0; i < 51; i++)
+            {
+                Console.SetCursorPosition(101, i);
+                Console.Write('!');
+            }
+            // Tool display
+            Console.SetCursorPosition(103, 1);
+            Console.Write("Yo tool: ");
+            Console.SetCursorPosition(103, 2);
+            Console.Write(tool);
+            // Color Display
+            Console.SetCursorPosition(103, 4);
+            Console.Write("Yo color: ");
+            Console.SetCursorPosition(105, 6);
+            Console.Write('█');
+            Console.SetCursorPosition(105, 7);
+            Console.Write('█');
+            Console.SetCursorPosition(106, 6);
+            Console.Write('█');
+            Console.SetCursorPosition(106, 7);
+            Console.Write('█');
+            Console.SetCursorPosition(108, 6);
+            Console.Write((ConsoleColor)color);
+            Console.SetCursorPosition(110, 6);
+            Console.Write("Yo opacity:");
+            Console.SetCursorPosition(111, 6);
             
 
         }
+        static void UpdateUI()
+        {
+            // tool
+            Console.SetCursorPosition(103, 2);
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write(tool);
+            Console.ForegroundColor = (ConsoleColor)color;
+            // color
+            Console.SetCursorPosition(105, 6);
+            Console.ForegroundColor = (ConsoleColor)color;
+            Console.Write('█');
+            Console.SetCursorPosition(105, 7);
+            Console.ForegroundColor = (ConsoleColor)color;
+            Console.Write('█');
+            Console.SetCursorPosition(106, 6);
+            Console.ForegroundColor = (ConsoleColor)color;
+            Console.Write('█');
+            Console.SetCursorPosition(106, 7);
+            Console.ForegroundColor = (ConsoleColor)color;
+            Console.Write('█');
+            Console.SetCursorPosition(108, 6);
+            Console.Write("              ");
+            Console.SetCursorPosition(108, 6);
+            Console.Write((ConsoleColor)color);
+        }
+        static void Draw()
+        {
+            if (eraser)
+            {
+                Console.Write(' ');
+            }
+            else
+            {
+                //if () {
+                Console.Write(shade[opacity]);
+                //}
+            }
+        }
+
         /*
         static void CreateCanvas(int width, int height)
         {   
